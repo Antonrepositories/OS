@@ -20,26 +20,27 @@ def g(x):
             time.sleep(10)
 
 def check_progress(f_thread, g_thread):
+    flag = False
     wait_time = 10
     while True:
-        time.sleep(wait_time)
-        if f_thread.is_alive():
-            if g_thread.is_alive():
-                choice = input("Обчислення f та g ще тривають. Продовжити? (1 - продовжити обчислення, 2 - припинити, 3 - продовжити без питань): ")
+        if flag == False:
+            time.sleep(wait_time)
+            if f_thread.is_alive():
+                if g_thread.is_alive():
+                    choice = input("Обчислення f та g ще тривають. Продовжити? (1 - продовжити обчислення, 2 - припинити, 3 - продовжити без питань): ")
+                else:
+                    choice = input("Обчислення f ще триває. Продовжити? (1 - продовжити обчислення, 2 - припинити, 3 - продовжити без питань): ")
             else:
-                choice = input("Обчислення f ще триває. Продовжити? (1 - продовжити обчислення, 2 - припинити, 3 - продовжити без питань): ")
-        else:
-            if g_thread.is_alive():
-                choice = input("Обчислення g ще триває. Продовжити? (1 - продовжити обчислення, 2 - припинити, 3 - продовжити без питань): ")
-            else:
+                if g_thread.is_alive():
+                    choice = input("Обчислення g ще триває. Продовжити? (1 - продовжити обчислення, 2 - припинити, 3 - продовжити без питань): ")
+                else:
                 # Якщо обидва потоки завершилися, вийти з циклу
-                break
-        if choice == '2':
+                    break
+            if choice == '2':
             # Припинити обчислення
-            break
-        elif choice == '3':
-            # Продовжити без питань
-            break
+                break
+            elif choice == '3':
+                flag = True
 
 def main():
     x = int(input("Введіть значення x: "))
