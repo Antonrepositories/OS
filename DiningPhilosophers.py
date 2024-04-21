@@ -37,7 +37,7 @@ class DiningPhilosophers:
             self.put_forks(philosopher_id)
 
 if __name__ == "__main__":
-    num_philosophers = 3
+    num_philosophers = 10
     philosophers = []
     dining_table = DiningPhilosophers(num_philosophers)
 
