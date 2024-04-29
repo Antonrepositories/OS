@@ -21,7 +21,7 @@ def g(x):
 
 def check_progress(f_thread, g_thread):
     flag = False
-    wait_time = 10
+    wait_time = 10 
     while True:
         if flag == False:
             time.sleep(wait_time)
@@ -41,6 +41,9 @@ def check_progress(f_thread, g_thread):
                 break
             elif choice == '3':
                 flag = True
+        else:
+            if not f_thread.is_alive() or not g_thread.is_alive():
+                break
 
 def main():
     x = int(input("Введіть значення x: "))
@@ -55,6 +58,12 @@ def main():
 
     if not f_thread.is_alive() and not g_thread.is_alive():
         result = f(x) or g(x)
+        print("Результат f(x) || g(x):", result)
+    elif f_thread.is_alive() and not g_thread.is_alive():
+        result = g(x)
+        print("Результат f(x) || g(x):", result)
+    elif not f_thread.is_alive() and g_thread.is_alive():
+        result = f(x)
         print("Результат f(x) || g(x):", result)
 
 if __name__ == "__main__":
